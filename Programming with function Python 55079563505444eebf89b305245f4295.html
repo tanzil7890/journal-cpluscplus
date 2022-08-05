@@ -1,0 +1,748 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Programming with function: Python</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0d095bb7-c354-436f-b7ee-dc6cf2e79896" class="page sans"><header><h1 class="page-title">Programming with function: Python</h1></header><div class="page-body"><blockquote id="4de483f8-38c2-488a-b6d8-7d169eb384a1" class=""><strong>In this course </strong><em><strong>Programming with function: Python </strong></em><strong>you will learn:                                        what is a function, how does function works, the types of function, the calling function and called function, and at last formal &amp; actual parameters.</strong></blockquote><p id="51cd0743-eb16-4cb6-bd1b-4a630bd08794" class="">
+</p><p id="c77e926e-d45f-466c-a312-9009d1253fbe" class="">A <code>program</code> is a set of statements that takes some input, does specific computations based on the given input, and produces the desired output. A very large program with a huge single list of instructions increases complexity. So Python allows us to divide a large program into some small independent units or blocks known as <code>functions</code>. Decomposing a complex problem into a simpler one using functions improves the <code>clarity of the code</code>.</p><p id="6640ca29-7cf7-4b6d-aff0-63369236c3d7" class=""><code>Functions</code> are the most important segments of subprograms of an application used to perform specific tasks. A python program can have one or more functions.</p><figure id="55079563-5054-44ee-bf89-b305245f4295" class="image"><a href="Programming%20with%20function%20Python%2055079563505444eebf89b305245f4295/Img1.png"><img style="width:1198px" src="Programming%20with%20function%20Python%2055079563505444eebf89b305245f4295/Img1.png"/></a></figure><h2 id="a78f2707-90c1-4944-8798-0a3437a59bce" class="">Advantages of using Python</h2><ul id="0a0b7952-e264-43a9-b865-be0856e0df66" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>Induce reusability of code.</strong></span><ul id="6a81d347-dc1e-4392-b0df-3904543b9193" class="bulleted-list"><li style="list-style-type:circle"><em>We can call python functions any number of times from any part of the program. So function induces reusability in a program.</em></li></ul></li></ul><ul id="6e8844c3-eb55-451c-b9d4-c41b97da5f4a" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>Reduce duplication of code.</strong></span><ul id="0b232831-d0c5-4487-934f-8505906ef066" class="bulleted-list"><li style="list-style-type:circle"><em>By using functions, we can avoid rewriting the same logic/code, again and again, Thus function reduces program size.</em></li></ul></li></ul><p id="f1aa308d-cdb9-4ef8-80e2-82d8612db7e5" class="">
+</p><h2 id="bd9145ee-cef1-48ed-b080-8d9bca8df299" class="">Types of Functions</h2><p id="f1a9cfe6-c762-4a21-acd1-650ff7308c4a" class="">Basically, there are three types of functions used in the python program:</p><ul id="446df84c-1731-4b51-8fee-b8f7dfa64e40" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>Built-in function (python library function)</strong></span><ul id="504ec686-8a1d-4f16-a199-1aa42ed76fb5" class="bulleted-list"><li style="list-style-type:circle"><em>These are predefined functions and are always available in the python library</em></li></ul></li></ul><ul id="35934ed6-0814-427c-a902-062fd480942b" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>The function is defined within modules.</strong></span><ul id="735c329c-e209-4d02-9938-7e23686812dd" class="bulleted-list"><li style="list-style-type:circle"><em>These are also predefined functions available in different modules.</em></li></ul></li></ul><ul id="d132b0b2-58a5-42bf-90b8-313717ec0a3e" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>User-defined function</strong></span><ul id="c6bee7e3-e94d-4bf6-a93b-1a3ad5ffcb9c" class="bulleted-list"><li style="list-style-type:circle"><em>These are defined by the user/programmer/us.</em></li></ul></li></ul><p id="215a10f0-c4ef-4ca2-8c5d-8cc7583411d2" class="">
+</p><h3 id="7483e3de-9b90-488c-94aa-953a64acda6f" class="">Built-in functions</h3><p id="26e5cb4a-79f7-4742-92f0-b0c982abfab7" class="">These functions are already built in the library of python and can be accessed by programmers easily. These are always available and for using them, we don&#x27;t have to import any module (file). </p><p id="87512144-56ed-4ae0-9aac-e09f5c9913ea" class="">Python has a small set of built-in functions like: <code>abs()</code>, <code>max()</code>, <code>min()</code>, <code>len()</code>, <code>range()</code>,<code>round()</code>, <code>bool()</code> ,<code>chr()</code>, <code>float()</code>, <code>int()</code>, <code>long()</code>, <code>str( )</code>, <code>type( )</code>, <code>id( )</code> etc</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a882227d-18e8-4f8b-b184-b97a674d7ae6"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><strong>Example:</strong>
+<code>max( x, y, z)</code> returns the largest of its 3 arguments
+</div></figure><pre id="970956dd-9310-4802-b6a1-64605708c839" class="code"><code>&gt;&gt;&gt; max(80, -70, 100)</code></pre><p id="dc818938-c3e7-4f89-98b2-073e87084cbd" class=""><strong>Output:</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="03c0e6dd-a46c-48cd-9c9c-c53895055691"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">100</div></figure><p id="8a6107c1-d387-47fd-ba7a-da34e1bee571" class="">
+</p><h3 id="2615a5ce-de72-47b7-a964-8228d2c3b4ab" class="">Function defined in modules</h3><p id="13fcc7ab-fe41-4d5b-8b51-e948c98c534e" class="">When we want to use module-based functions in our program, we need to import the corresponding module of that particular function.</p><p id="194d8efc-9549-4c28-809d-dd42dd693942" class="">The functions available in math module are:
+<code>ceil()</code>, <code>floor()</code>, <code>fabs()</code>, <code>exp()</code>, <code>log()</code>, <code>pow()</code>, <code>sqrt()</code>, <code>cos()</code>, <code>sin()</code>, etc</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c4c70dcc-96ba-42e8-a721-f632c139488c"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>Explanation of some modules
+</strong><code><strong>ceil()</strong></code><strong>: </strong><em>returns the smallest integer not less than x.
+</em><strong><code>fabs(x)</code></strong><strong><em>: </em></strong><em>returns the absolute value of x,where x is a numeric value.</em></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5d8da6c1-52b4-43da-a402-4f61eb0a5ac4"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><strong>Example</strong><p id="99920970-559f-4219-ae6f-5c7a7ac5bb45" class="">To work with the functions of the math module, we must import the math module into our program. <code>sqrt()</code> returns the square root of a number</p></div></figure><pre id="594e216e-fee2-43d9-beb1-5e70f20e9d0b" class="code"><code>&gt;&gt;&gt; import math
+&gt;&gt;&gt; math.sqrt(9)</code></pre><p id="9fdcd864-d9c7-4afd-aa14-55dd7a9fe212" class="">Output:</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0e3b719a-76d7-41af-b864-e93c2915eda5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">7.0</div></figure><p id="29fecdd6-ba68-4447-942f-47eb28578c19" class="">
+</p><h3 id="0f099bc1-6593-4b55-8fd6-335e65d0ace4" class="">User-defined function</h3><p id="5c5fb377-c7fc-49c2-adec-813de4ad10f1" class="">In Python, programmers can also develop their own function(s). They are known as user-defined functions.</p><div id="655df3bc-166d-42eb-a524-fab9d3b08f5c" class="column-list"><div id="7ef709b7-9611-42dd-9246-2ca4dc7fcaba" style="width:43.75%" class="column"><figure id="0bc4cdee-99b4-4a4d-9290-6a1979c6c83e" class="image"><a href="Programming%20with%20function%20Python%2055079563505444eebf89b305245f4295/code4.png"><img style="width:478px" src="Programming%20with%20function%20Python%2055079563505444eebf89b305245f4295/code4.png"/></a></figure></div><div id="02e20e6a-e65a-40ae-a28e-6b34a504c782" style="width:56.25%" class="column"><pre id="aec4b040-4f8a-4ef1-b8f1-0d9294bdeb7d" class="code"><code>#defining the function with name
+def function-name(parameters, ..): #called function
+		#block of statements
+
+#This is the calling function
+function-name(parameters, ....) </code></pre><p id="7f532472-d9cb-4998-9f07-7ec07d28dd9b" class="">
+</p></div></div><p id="f6912ab9-f489-4e31-b791-0495c2aaeb97" class=""><strong>Example:</strong></p><pre id="a27b0a5b-5b28-494f-bd71-02dc34288cb3" class="code"><code>def Greetings():  #Called function
+		print(&quot;Hello to the function&quot;)
+
+
+Greetings():      #Calling function </code></pre><p id="42201941-cb6e-4e94-98d0-2591b178d493" class=""><strong>Output:</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="635c7c6b-7e65-4ee1-a149-5ca5983f8da5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Hello to the function</div></figure><p id="50c10c65-ed78-48e1-8cb5-d4361febaca7" class="">
+</p><h2 id="7da16bb9-cf60-46c7-876b-011f528fb8a2" class="">Defining functions in Python</h2><pre id="30004528-8c90-4185-b084-8a10a5c0df5f" class="code"><code>def functionName(list of parameter):
+		&#x27;&#x27;&#x27;_docstring&#x27;&#x27;&#x27;
+
+		function block
+		return [expression]</code></pre><p id="952265be-5d57-4968-b9d9-4a104995fe1c" class="">In the python program, generally, all python definitions are given at the top followed by statements that are not part of any functions These statements are not indented at all.</p><p id="dc728eec-0412-48d3-86e8-2f997ac78ec3" class="">The non-indented statements written after all the function definitions are often called top-level statements.</p><pre id="59a30aa5-3b96-4a70-b80c-4d4e262b7581" class="code"><code>def userFunction(arg1, arg2, arg3,....):
+		&#x27;&#x27;&#x27;__docstring&#x27;&#x27;&#x27;
+
+		program statement 1
+		program statement 2
+		program statement 3
+		.....
+		.....
+		
+		return
+
+userFunction(arg1, arg2, arg3)</code></pre><h3 id="3bce0c16-446a-4f9b-a961-8b64acb7e4a1" class="">Function definition with an example:</h3><pre id="14fccc85-706d-4ab5-b00c-7873073ab1b5" class="code"><code>#python function to calculate the sum o
+f two variables
+#defining the function
+def sum(a,b):
+		&#x27;&#x27;&#x27;takes a and b and return the sum&#x27;&#x27;&#x27;
+		return a+b;
+		
+#taking values from the user
+a = int(input(&quot;Enter a: &quot;))
+b = int(input(&quot;Enter b: &quot;))
+
+#printing the sum of a and b
+print(&quot;Sum = &quot;,sum(a,b))</code></pre><p id="7f9713aa-0bab-406f-8076-3c1b9487d499" class=""><strong>Output:</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="786b36d9-fd2a-4b12-8cba-23f269ad3bb2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Enter a: 10
+Enter b: 20
+Sum = 30</div></figure><ul id="8c8e152c-3cab-4a4c-be94-a203c62c30dd" class="bulleted-list"><li style="list-style-type:disc">Keyword <code>def</code> marks the start of the function header.</li></ul><ul id="199f5dc5-43fc-4e96-9011-83c74325b820" class="bulleted-list"><li style="list-style-type:disc">A function name to uniquely identify it. The name of the Function follows the same rule of naming the <code>identifier</code>.</li></ul><ul id="5d25d819-4728-4dba-8b7c-bcbb525ab561" class="bulleted-list"><li style="list-style-type:disc">Parameters <code>(arguments)</code> through which we pass values to a function are optional.</li></ul><ul id="3cc09daf-f1ed-4845-a5f7-ec6beb4f5b45" class="bulleted-list"><li style="list-style-type:disc">A <code>colon (:)</code> is used to mark the end of the function header.</li></ul><ul id="d88ef9fe-5583-494f-814f-d1552d86f72c" class="bulleted-list"><li style="list-style-type:disc">The string after the function header is called the <code>docstring</code>. It is briefly used to explain what a function does. comments are ignored by the python interpreters but <code>docstrings</code> can be viewed when the program is running.</li></ul><ul id="39151a04-99ae-48fe-a87c-bb8605c6bdf8" class="bulleted-list"><li style="list-style-type:disc">One or more python statements form the function body. All the statements of the block should have the <code>same indentation level</code>.</li></ul><ul id="12291b6c-10b8-41ea-bb8b-57551918419e" class="bulleted-list"><li style="list-style-type:disc">A <code>return statement</code> is used to return value(s) from the function but it is always optional.</li></ul><p id="9d4238c5-6b5d-4928-9e56-04cd3d691609" class="">
+</p><h2 id="aebc8b91-6fa4-428f-a66f-2ff0edeb5e02" class="">How does a function work?</h2><ul id="db883df0-945c-4c24-b734-ee9d1c866f48" class="bulleted-list"><li style="list-style-type:disc">Execution always begins from the first statement of the program.</li></ul><ul id="7102e6a2-713e-4be0-807f-393ef5e60f8d" class="bulleted-list"><li style="list-style-type:disc">A python program may contain several function definitions.</li></ul><ul id="0772934d-bed9-4e38-8122-cf6daab23748" class="bulleted-list"><li style="list-style-type:disc">If any function definition is found, python executes only the function header for its correctness of it and skips all lines of the function body(block).</li></ul><ul id="a06a411a-99ed-49da-bf13-7fc770ded3ef" class="bulleted-list"><li style="list-style-type:disc">When python sequentially reaches the top-level statement’s function call, python transfers control to the function header and then execution of the function body takes place.</li></ul><ul id="f2cb8349-47ef-4b69-a1c7-2a486aac6cc4" class="bulleted-list"><li style="list-style-type:disc">Finally function execution ends with a return statement if any or the last statement of the function body.</li></ul><figure id="078eedf2-f880-48f9-9afb-7621c40379eb" class="image"><a href="Programming%20with%20function%20Python%2055079563505444eebf89b305245f4295/code5.png"><img style="width:672px" src="Programming%20with%20function%20Python%2055079563505444eebf89b305245f4295/code5.png"/></a></figure><p id="ec3b81bd-7dcc-4654-8196-307bb897b16c" class="">
+</p><h2 id="93f5c883-147a-491f-8310-30318419113b" class="">The flow of execution in a function call</h2><ul id="6540888f-401f-4bca-a0e3-b764e975df8a" class="bulleted-list"><li style="list-style-type:disc">The flow of execution refers to the order in which statements are executed. </li></ul><ul id="544bd79b-f0c1-42c3-9096-cfd80364c2e1" class="bulleted-list"><li style="list-style-type:disc">A function body is executed in the execution frame. </li></ul><ul id="14050fd4-24c0-4612-8c71-597df97bee97" class="bulleted-list"><li style="list-style-type:disc">Whenever a function call statement is executed, the execution frame for the called function is created and the control is transferred to invoke the called function.</li></ul><ul id="fb67e5b9-f2f7-49a3-bf45-fa6d9ea7f687" class="bulleted-list"><li style="list-style-type:disc">Within the function’s execution frame, the body of the function gets executed and after the last statement of the function, the control returns to the statement with/without any value(s) to the function from where it is called(calling function).</li></ul><p id="655f69ef-04fc-4e83-b1d4-219dce6a48a1" class="">
+</p><h2 id="c14f437f-06bd-4167-92c8-eff1a0397113" class="">Function Parameters</h2><p id="c6b50fcd-726d-4338-ab1a-f29b15237f3e" class="">The values being passed through a <code>function call</code> statement are called <code>arguments or actual parameters</code>. The values received in the <code>function definition</code> are called <code>parameters or formal parameters.</code></p><h3 id="428c3ef2-d3dd-455f-a76a-48bbc5260722" class=""><strong>A function has two types of parameters</strong></h3><ul id="86a9af06-b164-4979-a5ee-b87799311991" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>Formal parameter(</strong></span><em><span style="border-bottom:0.05em solid"><strong>parameters</strong></span></em><span style="border-bottom:0.05em solid"><strong>): </strong></span><ul id="27bfe66d-c81f-4c7c-86c5-892d4e674bb5" class="bulleted-list"><li style="list-style-type:circle"><em>Formal parameters are written in the function prototype(function definition). </em><strong><em>Formal parameters</em></strong><em> are local variables that are assigned values from the arguments when the function is called.</em></li></ul></li></ul><ul id="5df7ca1a-43ef-44f1-88c8-490a87aa13a2" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>Actual parameter(</strong></span><em><span style="border-bottom:0.05em solid"><strong>arguments</strong></span></em><span style="border-bottom:0.05em solid"><strong>):</strong></span><ul id="59466256-4b7e-471d-94df-286b377a1768" class="bulleted-list"><li style="list-style-type:circle"><em>When a function is called, the values that are passed are called actual parameters. At the time of the call, each </em><strong><em>actual parameter</em></strong><em> is assigned to the corresponding formal parameter in the function definition.</em></li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="86058a1d-a200-4787-a623-bc7265cc3951"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><em><strong>Note:
+</strong></em><ul id="2931b18e-45ef-4fda-a3d8-1cf332b23de5" class="bulleted-list"><li style="list-style-type:disc">The function which is called by another Function is called Called Function. The called
+function contains the definition of the function and formal parameters are associated with them.</li></ul><ul id="83f7dd04-4286-42c5-b1e2-85bda82dc1ee" class="bulleted-list"><li style="list-style-type:disc">The Function which calls another Function is called the Calling Function and actual
+parameters are associated with them. </li></ul><ul id="99412388-b5f1-4277-b228-6cecc8915887" class="bulleted-list"><li style="list-style-type:disc">In python, a function must be defined before the function calling otherwise python
+the interpreter gives an error</li></ul><p id="071d1e48-4b40-4051-a66b-3c0a89e57fd8" class="">
+</p></div></figure><figure id="b5b71fa5-690a-4a6b-a98c-db192710bbad" class="image"><a href="Programming%20with%20function%20Python%2055079563505444eebf89b305245f4295/code6.png"><img style="width:1088px" src="Programming%20with%20function%20Python%2055079563505444eebf89b305245f4295/code6.png"/></a></figure><p id="74e57cc7-af2e-4357-b9f1-227ddcec95bc" class="">Here, <code>mid = average(10.6, 7.2)</code> is the calling function and <code>average(a, b)</code> is the called function. First, it is calling <code>mid = average(10.6, 7.2)</code>, and then the return value <code>sum/2</code> from the called function <code>def average(a, b)</code> will be stored in <code>mid</code> variable and then get printed the answer by <code>print(mid)</code> .</p><p id="404ac29f-e8de-4629-bc3d-0cd88d8fbad8" class="">
+</p><h2 id="efcb35a1-b41f-43b4-9b39-6a9b756ca02d" class="">Lambada function</h2><p id="82f983fb-018a-41c0-ad7b-f553499d40af" class="">Python lambda function doesn’t have any return statement. It has only a single expression which is always returned by default. The Python lambda function is anonymous as it is a function without a <code>def keyword</code> and <code>name</code>. To create a Python lambda function, we have to use the <code>lambda keyword</code>.</p><p id="509cebb3-efac-4692-b66f-183aa227a454" class="">The basic syntax of python lambda is:</p><pre id="8090165d-a461-4b50-b757-20dda76f6323" class="code"><code>Lambda arguments : expression</code></pre><p id="243dae9a-fc22-4cf3-8441-20468fdcfe5c" class="">
+</p><p id="54b3b805-f5b3-406e-8718-fb421c635523" class=""><em>The Python lambda function accepts any number of arguments but uses only one expression.</em></p><p id="b8010d2e-bff1-4d35-a9a4-9273edd70cf5" class="">For instance, <code>lambda a, b: a + b</code>. Here, <code>a</code> and <code>b</code> are the arguments accepted by the lambda function. <code>a + b</code> is the expression.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="32ddd924-0780-42f0-9d58-ef9c7d7c6658"><div style="font-size:1.5em"><span class="icon">❔</span></div><div style="width:100%"><strong>Example</strong></div></figure><pre id="bb3ad055-e31e-4c5f-899f-41ea7f8b99ee" class="code"><code>add = lambda x, y : x + y
+print(add(10, 20))
+
+print(&quot;\nResult from a Function&quot;)
+def add_func(x, y):
+		return x + y
+
+print(add_func(10, 20))</code></pre><p id="94f857c5-8545-4f25-aee3-f06831fc0551" class="">Both the <strong>lambda function</strong> and the <strong>regular function</strong> return the same result. However, the <strong>regular function</strong> needs a <code>def</code> keyword, function name, and a <code>return</code> value. Whereas, the <strong>lambda function</strong> does not need any of them. By default, it returns the expression result.</p><pre id="ed0cf868-b63d-4911-a3a1-aa87b8443a48" class="code"><code>&gt;&gt;&gt; f = lambda x,y : 2 * x + y
+&gt;&gt;&gt; f
+&lt;function &lt;lambda&gt; at 0x87d30&gt;
+&gt;&gt;&gt; f(3, 4)
+10
+&gt;&gt;&gt; v = lambda x: x*x(100)
+&gt;&gt;&gt; v
+&lt;function &lt;lambda&gt; at 0x87df0&gt;
+&gt;&gt;&gt; v = (lambda x: x*x)(100)
+&gt;&gt;&gt; v
+10000</code></pre><p id="d00e70f7-9d2f-4586-973e-2394d4fb14d8" class="">
+</p></div></article></body></html>
